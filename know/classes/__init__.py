@@ -3,6 +3,7 @@
 from .activity import Activity
 from .airport import Airport
 from .appointment import Appointment
+from .audio_frame import AudioFrame
 from .birth import Birth
 from .birthday import Birthday
 from .birthday_party import BirthdayParty
@@ -27,6 +28,7 @@ from .hindu_temple import HinduTemple
 from .holiday import Holiday
 from .hospital import Hospital
 from .hotel import Hotel
+from .image import Image
 from .landmark import Landmark
 from .link import Link
 from .meeting import Meeting
