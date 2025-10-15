@@ -2,6 +2,7 @@
 
 from base64 import b64decode
 from pydantic import BaseModel, Field
+import PIL.Image
 
 
 class Image(BaseModel):
@@ -16,6 +17,4 @@ class Image(BaseModel):
         return b64decode(self.data_url.split(",")[1])
 
     def decode(self) -> PIL.Image:
-        from PIL.Image import frombytes
-
-        return frombytes("RGB", (self.width, self.height), self.data)
+        return PIL.Image.frombytes("RGB", (self.width, self.height), self.data)

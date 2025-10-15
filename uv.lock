@@ -455,6 +455,7 @@ wheels = [
 name = "know-py"
 source = { editable = "." }
 dependencies = [
+    { name = "pillow" },
     { name = "pydantic" },
 ]
 
@@ -483,6 +484,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
+    { name = "pillow" },
     { name = "pillow", marker = "extra == 'image'" },
     { name = "pydantic", specifier = ">=2" },
 ]

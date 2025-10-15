@@ -15,7 +15,7 @@ license-files = ["UNLICENSE"]
 dynamic = ["version"]
 
 requires-python = ">=3.9"
-dependencies = ["pydantic>=2"]
+dependencies = ["pillow", "pydantic>=2"]
 
 keywords = []
 classifiers = [
