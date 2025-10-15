@@ -4,6 +4,9 @@
 # Environment variables
 .env
 
+# JetBrains IntelliJ IDEA
+.idea/
+
 # Visual Studio Code
 .vscode/
 
@@ -29,3 +32,9 @@ build/
 # Python setuptools
 dist/
 *.egg-info/
+
+# hatch-vcs artifacts
+**/_version.py
+
+# MkDocs artifacts
+.cache/

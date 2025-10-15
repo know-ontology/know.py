@@ -2,5 +2,81 @@
 # See: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 
 [build-system]
-requires = ["setuptools >= 61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "know.py"
+description = "The KNOW Framework for Python"
+readme = "README.md"
+authors = [{ name = "KNOW Project", email = "support@know.dev" }]
+license = "Unlicense"
+license-files = ["UNLICENSE"]
+dynamic = ["version"]
+
+requires-python = ">=3.9"
+dependencies = []
+
+keywords = []
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: Public Domain",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Homepage = "https://know.dev"
+Repository = "https://github.com/know-ontology/know.py"
+Changelog = "https://github.com/know-ontology/know.py/blob/master/CHANGES.md"
+Releases = "https://github.com/know-ontology/know.py/releases"
+Issues = "https://github.com/know-ontology/know.py/issues"
+Documentation = "https://github.com/know-ontology/know.py/blob/master/README.md"
+
+[dependency-groups]
+dev = []
+docs = [
+    "mkdocs>=1.6",
+    "mkdocs-git-committers-plugin-2>=2.5",
+    "mkdocs-git-revision-date-localized-plugin>=1.2",
+    "mkdocs-github-admonitions-plugin>=0.1",
+    "mkdocs-llmstxt>=0.2",
+    "mkdocs-material[imaging]>=9.5",
+    "mkdocstrings[python]>=0.29",
+]
+lint = ["ruff"]
+test = ["pytest", "pytest-mock"]
+
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "0.0.0"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "know/_version.py"
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+    "AUTHORS",
+    "CHANGES.md",
+    "Makefile",
+    "VERSION",
+    "know",
+]
+exclude = [".*"]
+
+[tool.hatch.envs.default]
+installer = "uv"
+
+[tool.mypy]
+disallow_untyped_defs = true
+
+[tool.uv]
+default-groups = ["dev", "docs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
