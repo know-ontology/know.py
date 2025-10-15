@@ -60,7 +60,7 @@ source = "vcs"
 fallback-version = "0.0.0"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "know/_version.py"
+version-file = "src/know/_version.py"
 
 [tool.hatch.build.targets.sdist]
 only-include = [
@@ -68,9 +68,12 @@ only-include = [
     "CHANGES.md",
     "Makefile",
     "VERSION",
-    "know",
+    "src/know",
 ]
 exclude = [".*"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/know"]
 
 [tool.hatch.envs.default]
 installer = "uv"
