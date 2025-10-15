@@ -15,7 +15,7 @@ license-files = ["UNLICENSE"]
 dynamic = ["version"]
 
 requires-python = ">=3.9"
-dependencies = []
+dependencies = ["pydantic>=2"]
 
 keywords = []
 classifiers = [
@@ -29,6 +29,9 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Topic :: Software Development :: Libraries",
 ]
+
+[project.optional-dependencies]
+image = ['pillow']
 
 [project.urls]
 Homepage = "https://know.dev"
