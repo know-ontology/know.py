@@ -2,6 +2,7 @@
 
 from base64 import b64encode, b64decode
 from pydantic import BaseModel, Field, computed_field
+from typing import Any
 import PIL.Image
 
 
@@ -23,3 +24,9 @@ class Image(BaseModel):
 
     def decode(self) -> PIL.Image:
         return PIL.Image.frombytes("RGB", (self.width, self.height), self.data)
+
+    def to_json(self) -> str:
+        return json.dumps(self.to_dict())
+
+    def to_dict(self) -> dict[str, Any]:
+        return self.model_dump(by_alias=True, exclude_computed_fields=True)
