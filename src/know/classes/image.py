@@ -26,6 +26,8 @@ class Image(BaseModel):
         return PIL.Image.frombytes("RGB", (self.width, self.height), self.data)
 
     def to_json(self) -> str:
+        import json
+
         return json.dumps(self.to_dict())
 
     def to_dict(self) -> dict[str, Any]:
