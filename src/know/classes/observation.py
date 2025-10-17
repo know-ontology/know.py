@@ -11,7 +11,7 @@ class Observation(BaseModel):
     def to_json(self) -> str:
         import json
 
-        return json.dumps(self.to_dict())
+        return json.dumps(self.to_dict(), separators=(",", ":"))
 
     def to_dict(self) -> dict[str, Any]:
         return self.model_dump(by_alias=True, exclude_computed_fields=True)
