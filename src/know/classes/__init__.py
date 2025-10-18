@@ -38,7 +38,7 @@ from .nationality import Nationality
 from .observation import Observation
 from .organization import Organization
 from .party import Party
-from .percept import Percept
+from .percept import Percept, VisualPercept
 from .person import Person
 from .place import Place
 from .pub import Pub

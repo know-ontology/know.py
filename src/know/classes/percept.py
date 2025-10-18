@@ -1,7 +1,6 @@
 # This is free and unencumbered software released into the public domain.
 
 from pydantic import BaseModel, Field
-from typing import Any, Optional
 
 
 class Percept(BaseModel):
@@ -13,12 +12,12 @@ class Percept(BaseModel):
 
         return json.dumps(self.to_dict(), separators=(",", ":"))
 
-    def to_dict(self) -> dict[str, Any]:
+    def to_dict(self) -> dict[str, object]:
         return self.model_dump(by_alias=True, exclude_computed_fields=True)
 
 
 class VisualPercept(Percept):
     type: str = Field("VisualPercept", alias="@type")
-    source: Optional[str] = None
+    source: str | None = None
     subject: str
     confidence: float
