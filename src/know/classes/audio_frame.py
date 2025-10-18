@@ -2,7 +2,6 @@
 
 from base64 import b64decode
 from pydantic import BaseModel, Field
-from typing import Any
 
 
 class AudioFrame(BaseModel):
@@ -22,5 +21,5 @@ class AudioFrame(BaseModel):
 
         return json.dumps(self.to_dict(), separators=(",", ":"))
 
-    def to_dict(self) -> dict[str, Any]:
+    def to_dict(self) -> dict[str, object]:
         return self.model_dump(by_alias=True, exclude_computed_fields=True)
