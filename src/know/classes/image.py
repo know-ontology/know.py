@@ -1,17 +1,21 @@
 # This is free and unencumbered software released into the public domain.
 
 from base64 import b64encode, b64decode
-from pydantic import BaseModel, Field, computed_field
+from typing import override
+from pydantic import Field, computed_field
 from typing_extensions import Self
+from .thing import Thing
 import PIL.Image
 
 
-class Image(BaseModel):
+class Image(Thing):
     type: str = Field("Image", alias="@type")
-    id: str = Field(..., serialization_alias="@id")
     width: int | None = None
     height: int | None = None
     data_url: str | None = Field(default=None, alias="data")
+
+    def __init__(self, id: str | None = None, **kwargs: object):
+        super().__init__(id, **kwargs)
 
     @computed_field
     @property
@@ -29,21 +33,9 @@ class Image(BaseModel):
             return PIL.Image.frombytes("RGB", (self.width, self.height), self.data)
         return None
 
+    @override
     def metadata(self) -> Self:
         return self.without_data()
 
     def without_data(self) -> Self:
         return self.model_copy(update={"data": None, "data_url": None})
-
-    def to_json(self) -> str:
-        import json
-
-        return json.dumps(self.to_dict(), separators=(",", ":"))
-
-    def to_dict(self) -> dict[str, object]:
-        return self.model_dump(
-            by_alias=True,
-            exclude_unset=True,
-            exclude_none=True,
-            exclude_computed_fields=True,
-        )

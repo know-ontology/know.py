@@ -1,24 +1,14 @@
 # This is free and unencumbered software released into the public domain.
 
-from pydantic import BaseModel, Field
+from pydantic import Field
 from .percept import VisualPercept
+from .thing import Thing
 
 
-class Observation(BaseModel):
+class Observation(Thing):
     type: str = Field("Observation", alias="@type")
-    id: str = Field(..., serialization_alias="@id")
     source: str | None = None
     percepts: list[VisualPercept] = []
 
-    def to_json(self) -> str:
-        import json
-
-        return json.dumps(self.to_dict(), separators=(",", ":"))
-
-    def to_dict(self) -> dict[str, object]:
-        return self.model_dump(
-            by_alias=True,
-            exclude_unset=True,
-            exclude_none=True,
-            exclude_computed_fields=True,
-        )
+    def __init__(self, id: str | None = None, **kwargs: object):
+        super().__init__(id, **kwargs)

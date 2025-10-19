@@ -6,7 +6,10 @@ from typing_extensions import Self
 
 class Thing(BaseModel):
     type: str = Field("Thing", alias="@type")
-    id: str = Field(..., serialization_alias="@id")
+    id: str | None = Field(default=None, alias="@id")
+
+    def __init__(self, id: str | None = None, **kwargs: object):
+        super().__init__(**(kwargs | {"@id": id}))
 
     def metadata(self) -> Self:
         return self
