@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 
 class AudioFrame(BaseModel):
     type: str = Field("AudioFrame", alias="@type")
-    id: str = Field(..., alias="@id")
+    id: str = Field(..., serialization_alias="@id")
     rate: int
     channels: int
     samples: int
@@ -22,4 +22,9 @@ class AudioFrame(BaseModel):
         return json.dumps(self.to_dict(), separators=(",", ":"))
 
     def to_dict(self) -> dict[str, object]:
-        return self.model_dump(by_alias=True, exclude_computed_fields=True)
+        return self.model_dump(
+            by_alias=True,
+            exclude_unset=True,
+            exclude_none=True,
+            exclude_computed_fields=True,
+        )

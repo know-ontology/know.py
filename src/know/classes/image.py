@@ -8,7 +8,7 @@ import PIL.Image
 
 class Image(BaseModel):
     type: str = Field("Image", alias="@type")
-    id: str = Field(..., alias="@id")
+    id: str = Field(..., serialization_alias="@id")
     width: int | None = None
     height: int | None = None
     data_url: str | None = Field(default=None, alias="data")
@@ -42,5 +42,8 @@ class Image(BaseModel):
 
     def to_dict(self) -> dict[str, object]:
         return self.model_dump(
-            by_alias=True, exclude_computed_fields=True, exclude_none=True
+            by_alias=True,
+            exclude_unset=True,
+            exclude_none=True,
+            exclude_computed_fields=True,
         )

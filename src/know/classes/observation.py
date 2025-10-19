@@ -6,9 +6,9 @@ from .percept import VisualPercept
 
 class Observation(BaseModel):
     type: str = Field("Observation", alias="@type")
-    id: str = Field(..., alias="@id")
+    id: str = Field(..., serialization_alias="@id")
     source: str | None = None
-    percepts: list[VisualPercept] | None = None
+    percepts: list[VisualPercept] = []
 
     def to_json(self) -> str:
         import json
@@ -16,4 +16,9 @@ class Observation(BaseModel):
         return json.dumps(self.to_dict(), separators=(",", ":"))
 
     def to_dict(self) -> dict[str, object]:
-        return self.model_dump(by_alias=True, exclude_computed_fields=True)
+        return self.model_dump(
+            by_alias=True,
+            exclude_unset=True,
+            exclude_none=True,
+            exclude_computed_fields=True,
+        )
