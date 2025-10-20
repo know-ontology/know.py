@@ -22,7 +22,6 @@ class Thing(BaseModel):
     def to_dict(self) -> dict[str, object]:
         return self.model_dump(
             by_alias=True,
-            exclude_unset=True,
             exclude_none=True,
             exclude_computed_fields=True,
         )
