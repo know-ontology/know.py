@@ -4,7 +4,7 @@
 
 import sys
 
-assert sys.version_info >= (3, 9), "The KNOW Framework for Python requires Python 3.9+"
+assert sys.version_info >= (3, 9), "KNOW.py requires Python 3.9+"
 
 from ._version import __version__, __version_tuple__
 from .classes import *

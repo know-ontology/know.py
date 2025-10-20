@@ -9,7 +9,7 @@ class Thing(BaseModel):
     id: str | None = Field(default=None, alias="@id")
 
     def __init__(self, id: str | None = None, **kwargs: object):
-        super().__init__(**(kwargs | {"@id": id}))
+        super().__init__(**{"@id": id, **kwargs})
 
     def metadata(self) -> Self:
         return self

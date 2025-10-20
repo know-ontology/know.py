@@ -50,3 +50,19 @@ from .thing import Thing
 from .university import University
 from .venue import Venue
 from .wedding import Wedding
+
+
+def load(data: dict[str, object]) -> Thing:
+    if "@type" in data:
+        type = data["@type"]
+        if type == "AudioFrame":
+            return AudioFrame(None, **data)
+        elif type == "Image":
+            return Image(None, **data)
+        elif type == "Observation":
+            return Observation(None, **data)
+        elif type == "Percept":
+            return Percept(None, **data)
+        elif type == "VisualPercept":
+            return VisualPercept(None, **data)
+    return Thing(None, **data)
