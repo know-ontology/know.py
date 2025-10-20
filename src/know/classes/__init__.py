@@ -52,17 +52,31 @@ from .venue import Venue
 from .wedding import Wedding
 
 
-def load(data: dict[str, object]) -> Thing:
-    if "@type" in data:
-        type = data["@type"]
-        if type == "AudioFrame":
-            return AudioFrame(None, **data)
-        elif type == "Image":
-            return Image(None, **data)
-        elif type == "Observation":
-            return Observation(None, **data)
-        elif type == "Percept":
-            return Percept(None, **data)
-        elif type == "VisualPercept":
-            return VisualPercept(None, **data)
-    return Thing(None, **data)
+def loads(input: str | bytes | bytearray) -> Thing:
+    import json
+    import sys
+    from typing import cast
+
+    input_dict = json.loads(input)  # TODO: optimize this
+    if "@type" in input_dict:
+        input_type = str(input_dict["@type"])
+        try:
+            klass = cast(type[Thing], getattr(sys.modules[__name__], input_type))
+            return klass.model_validate_json(input, by_alias=True)
+        except AttributeError:
+            pass
+    return Thing(None, **input_dict)
+
+
+def load(input: dict[str, object]) -> Thing:
+    import sys
+    from typing import cast
+
+    if "@type" in input:
+        input_type = str(input["@type"])
+        try:
+            klass = cast(type[Thing], getattr(sys.modules[__name__], input_type))
+            return klass(None, **input)
+        except AttributeError:
+            pass
+    return Thing(None, **input)
