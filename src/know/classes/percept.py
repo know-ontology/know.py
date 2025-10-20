@@ -16,6 +16,7 @@ class VisualPercept(Percept):
     source: str | None = None
     subject: str
     confidence: float | None = None
+    box: str | None = None
 
     def __init__(self, id: str | None = None, **kwargs: object):
         super().__init__(id, **kwargs)

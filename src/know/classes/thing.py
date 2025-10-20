@@ -24,4 +24,5 @@ class Thing(BaseModel):
             by_alias=True,
             exclude_none=True,
             exclude_computed_fields=True,
+            serialize_as_any=True,
         )
