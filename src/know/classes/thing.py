@@ -1,10 +1,13 @@
 # This is free and unencumbered software released into the public domain.
 
 from pydantic import BaseModel, Field
+from typing import ClassVar
 from typing_extensions import Self
 
 
 class Thing(BaseModel):
+    model_label: ClassVar[str] = "Thing"
+
     type: str = Field("Thing", alias="@type")
     id: str | None = Field(default=None, alias="@id")
 

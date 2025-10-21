@@ -3,12 +3,15 @@
 from base64 import b64encode, b64decode
 from typing import override
 from pydantic import Field, computed_field
+from typing import ClassVar
 from typing_extensions import Self
 from .thing import Thing
 import PIL.Image
 
 
 class Image(Thing):
+    model_label: ClassVar[str] = "Image"
+
     type: str = Field("Image", alias="@type")
     width: int | None = None
     height: int | None = None

@@ -2,10 +2,13 @@
 
 from base64 import b64decode
 from pydantic import Field
+from typing import ClassVar
 from .thing import Thing
 
 
 class AudioFrame(Thing):
+    model_label: ClassVar[str] = "Audio Frame"
+
     type: str = Field("AudioFrame", alias="@type")
     rate: int
     channels: int
