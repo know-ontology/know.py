@@ -16,6 +16,7 @@ class Image(Thing):
     width: int | None = None
     height: int | None = None
     data_url: str | None = Field(default=None, alias="data")
+    source: str | None = None
 
     def __init__(self, id: str | None = None, **kwargs: object):
         super().__init__(id, **kwargs)
